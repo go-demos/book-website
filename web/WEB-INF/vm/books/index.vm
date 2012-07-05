@@ -1,32 +1,38 @@
 <html>
-    <head>
-      <title>Buy your favorite book</title>
-    </head>
-    <body>
-        <h1>Select a book you like</h1>
-        <form action="$req.getContextPath()/books/create" method="post">
-            <input id="selected_isbn" type="hidden" value="" />
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Book</th>
-                            <th>Author</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        #foreach ( $book in $books )
-                        <tr>
-                            <input type="radio" name="isbn" value="$book.isbn" class="book_isbn"/>
-                            <td>$book.name</td>
-                            <td>$book.author</td>
-                        </tr>
-                        #end
-                    </tbody>
-                </table>
-                <div>
-            </div>
-        </form>
-    </body>
+<head>
+    <title>Buy your favorite book</title>
+    <script type="text/javascript" src="javascripts/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="javascripts/order_books.js"></script>
+</head>
+<body>
+<h1>Select a book you like</h1>
+
+<form action="$req.getContextPath()/books/create" method="post">
+    <input id="selected_isbn" type="hidden" value=""/>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>Book</th>
+                <th>Author</th>
+            </tr>
+            </thead>
+            <tbody>
+                #foreach ( $book in $books )
+                <tr>
+                    <input type="radio" name="isbn" value="$book.isbn" class="book_isbn"/>
+                    <td>$book.name</td>
+                    <td>$book.author</td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+        <div>
+        </div>
+</form>
+</body>
+<script type="text/javascript">
+    new OrderBooks("#selected_isbn").registerHandler($(".book_isbn"));
+</script>
 </html>

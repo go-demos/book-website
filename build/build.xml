@@ -4,7 +4,8 @@
     <property name="test.dir" location="${basedir}/test"/>
     <property name="lib.dir" location="${basedir}/lib"/>
     <property name="web.path" value="${basedir}/web"/>
-    <property name="web.inf.path" value="${basedir}/web/WEB-INF"/>
+    <property name="js.path" value="${web.path}/javascripts"/>
+    <property name="web.inf.path" value="${web.path}/WEB-INF"/>
     <property name="meta.inf.path" value="${basedir}/META-INF"/>
     <property name="test.lib.dir" location="${basedir}/test-lib"/>
     <property name="target.dir" location="${basedir}/target"/>
@@ -77,8 +78,8 @@
             <classes dir="${classes.dir}" includes="**" />
             <classes dir="${src.dir}" includes="db/hibernate-mappings/**" />
             <webinf dir="${web.inf.path}" includes="**" />
-            <webinf dir="${web.path}" includes="*.jsp" />
             <metainf dir="${meta.inf.path}" includes="**" />
+            <fileset dir="${web.path}" includes="javascripts/**"/>
         </war>
     </target>
 
