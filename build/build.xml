@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<project name="BookWebsite-Build" basedir="../" default="pkg">
+    <property name="src.dir" location="${basedir}/src"/>
+    <property name="test.dir" location="${basedir}/test"/>
+    <property name="lib.dir" location="${basedir}/lib"/>
+    <property name="web.path" value="${basedir}/web"/>
+    <property name="web.inf.path" value="${basedir}/web/WEB-INF"/>
+    <property name="meta.inf.path" value="${basedir}/META-INF"/>
+    <property name="test.lib.dir" location="${basedir}/test-lib"/>
+    <property name="target.dir" location="${basedir}/target"/>
+    <property name="classes.dir" location="${target.dir}/classes"/>
+    <property name="test.classes.dir" location="${target.dir}/test-classes"/>
+    <property name="test.reports.dir" location="${target.dir}/reports"/>
+    <property name="pkg.dir" location="${target.dir}/pkg"/>
+
+    <path id="dependencies">
+        <fileset dir="${lib.dir}" includes="**/*.jar" id="dependencies.fileset"/>
+    </path>
+
+    <path id="test.dependencies">
+        <fileset dir="${test.lib.dir}" includes="**/*.jar" id="test.dependencies.fileset"/>
+    </path>
+
+    <path id="src.classpath">
+        <pathelement path="${classes.dir}"/>
+        <path refid="dependencies"/>
+    </path>
+
+    <path id="test.classpath">
+        <pathelement path="${test.classes.dir}"/>
+        <path refid="src.classpath"/>
+        <path refid="test.dependencies"/>
+    </path>
+
+    <target name="init" depends="clean">
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${test.classes.dir}"/>
+        <mkdir dir="${test.reports.dir}"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${target.dir}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac destdir="${classes.dir}" target="1.5" source="1.5" debug="true" includeantruntime="false">
+            <classpath refid="src.classpath"/>
+            <src path="${src.dir}"/>
+        </javac>
+    </target>
+
+    <target name="compile.tests" depends="compile">
+        <javac destdir="${test.classes.dir}" target="1.5" source="1.5" includeantruntime="false">
+            <classpath refid="test.classpath"/>
+            <src path="${test.dir}"/>
+        </javac>
+    </target>
+
+    <target name="test" depends="compile.tests, compile">
+        <junit failureproperty="test.failure" printsummary="yes" haltonfailure="true" fork="true">
+            <classpath refid="test.classpath"/>
+            <batchtest todir="${test.reports.dir}">
+                <fileset dir="${test.classes.dir}" includes="**/*Test.class*"/>
+                <formatter type="plain"/>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="pkg-for-ci">
+        <property name="basename" value="book_website"/>
+        <property name="war.path" value="${pkg.dir}/${basename}.war"/>
+        <war destfile="${war.path}" webxml="${web.inf.path}/web.xml">
+            <lib dir="${lib.dir}/commons" includes="*.jar" />
+            <lib dir="${lib.dir}/logging" includes="*.jar" />
+            <lib dir="${lib.dir}/spring" includes="*.jar" />
+            <lib dir="${lib.dir}/velocity" includes="*.jar" />
+            <classes dir="${classes.dir}" includes="**" />
+            <classes dir="${src.dir}" includes="db/hibernate-mappings/**" />
+            <webinf dir="${web.inf.path}" includes="**" />
+            <webinf dir="${web.path}" includes="*.jsp" />
+            <metainf dir="${meta.inf.path}" includes="**" />
+        </war>
+    </target>
+
+    <target name="pkg" depends="compile, pkg-for-ci" />
+</project>

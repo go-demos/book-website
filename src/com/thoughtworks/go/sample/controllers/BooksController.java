@@ -17,28 +17,9 @@ import java.util.Map;
 @Controller
 public class BooksController {
 
-    private BooksRepository booksRepository;
-
-    @Autowired
-    public BooksController(BooksRepository booksRepository) {
-        this.booksRepository = booksRepository;
-    }
-
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public ModelAndView allBooks(HttpServletRequest request) {
-        Map model = new HashMap();
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            model.put("message", session.getAttribute("flash"));
-            session.removeAttribute("flash");
-        }
-        model.put("books", booksRepository.allBooks());
-        return new ModelAndView("books/index", model);
-    }
-
-    @RequestMapping(value = "/books/new", method = RequestMethod.GET)
-    public ModelAndView newBook() {
-        return new ModelAndView("books/new", new HashMap());
+        return new ModelAndView("books/index", new HashMap());
     }
 
     @RequestMapping(value = "/books/create", method = RequestMethod.POST)
@@ -47,8 +28,6 @@ public class BooksController {
                                    @RequestParam("author") String author,
                                    @RequestParam("publisher") String publisher,
                                    HttpServletRequest request) {
-        booksRepository.save(new Book(isbn, name, author, publisher));
-        request.getSession(true).setAttribute("flash", "Book created successfully");
         return new ModelAndView(new RedirectView("/books", true));
     }
 }
