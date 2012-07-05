@@ -1,4 +1,4 @@
-package com.thoughtworks.go.sample.models;
+package com.thoughtworks.go.website.models;
 
 public class Book {
 

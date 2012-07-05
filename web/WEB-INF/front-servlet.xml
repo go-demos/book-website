@@ -8,5 +8,5 @@
 
     <import resource="velocity-config/velocity-config.xml"/>
     <context:annotation-config/>
-    <context:component-scan base-package="com.thoughtworks.go.sample"/>
+    <context:component-scan base-package="com.thoughtworks.go.website"/>
 </beans>
