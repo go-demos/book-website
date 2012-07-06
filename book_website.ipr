@@ -220,6 +220,14 @@
       <SOURCES />
       <jarDirectory url="file://$PROJECT_DIR$/lib/servlets" recursive="false" />
     </library>
+    <library name="logging">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/lib/logging" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/lib/logging" recursive="false" />
+    </library>
     <library name="spring">
       <CLASSES>
         <root url="file://$PROJECT_DIR$/lib/spring" />
@@ -227,6 +235,14 @@
       <JAVADOC />
       <SOURCES />
       <jarDirectory url="file://$PROJECT_DIR$/lib/spring" recursive="false" />
+    </library>
+    <library name="test-libs">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/test-lib" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/test-lib" recursive="false" />
     </library>
     <library name="xstream">
       <CLASSES>
