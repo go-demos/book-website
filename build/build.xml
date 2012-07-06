@@ -62,7 +62,7 @@
             <classpath refid="test.classpath"/>
             <batchtest todir="${test.reports.dir}">
                 <fileset dir="${test.classes.dir}" includes="**/*Test.class*"/>
-                <formatter type="plain"/>
+                <formatter type="xml"/>
             </batchtest>
         </junit>
     </target>
@@ -86,5 +86,5 @@
         </war>
     </target>
 
-    <target name="pkg" depends="compile, pkg-for-ci" />
+    <target name="pkg" depends="test, pkg-for-ci" />
 </project>
