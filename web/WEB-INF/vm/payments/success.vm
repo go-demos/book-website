@@ -1,0 +1,10 @@
+<html>
+<head>
+    <title>You own a book!</title>
+</head>
+<body>
+<h1>You now own a copy of $book.name</h1>
+<div></div>
+<h2>Return to the <a href="$req.getContextPath()/books">main page</a></h2>
+</body>
+</html>
