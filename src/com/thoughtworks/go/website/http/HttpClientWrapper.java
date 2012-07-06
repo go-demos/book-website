@@ -62,7 +62,7 @@ public class HttpClientWrapper {
         return methodParams;
     }
 
-    private String baseUrl() {
+    public String baseUrl() {
         return String.format("http://%s:%d", hostname, port);
     }
 

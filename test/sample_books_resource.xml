@@ -1,0 +1,16 @@
+<list>
+    <book>
+        <id>-1</id>
+        <isbn>isbn1</isbn>
+        <name>first</name>
+        <author>person1</author>
+        <publisher>pub1</publisher>
+    </book>
+    <book>
+        <id>-1</id>
+        <isbn>isbn2</isbn>
+        <name>second</name>
+        <author>person2</author>
+        <publisher>pub2</publisher>
+    </book>
+</list>

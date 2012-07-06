@@ -15,11 +15,11 @@
     <property name="pkg.dir" location="${target.dir}/pkg"/>
 
     <path id="dependencies">
-        <fileset dir="${lib.dir}" includes="**/*.jar" id="dependencies.fileset"/>
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
     </path>
 
     <path id="test.dependencies">
-        <fileset dir="${test.lib.dir}" includes="**/*.jar" id="test.dependencies.fileset"/>
+        <fileset dir="${test.lib.dir}" includes="**/*.jar" />
     </path>
 
     <path id="src.classpath">
@@ -55,6 +55,8 @@
             <classpath refid="test.classpath"/>
             <src path="${test.dir}"/>
         </javac>
+        <copy file="${test.dir}/book-management-service.properties" todir="${test.classes.dir}"/>
+        <copy file="${test.dir}/sample_books_resource.xml" todir="${test.classes.dir}"/>
     </target>
 
     <target name="test" depends="compile.tests, compile">

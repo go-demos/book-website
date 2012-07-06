@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.Properties;
@@ -16,20 +17,31 @@ import java.util.Properties;
 public class BooksCollectionServiceImpl implements BooksCollectionService {
 
     private Properties properties;
+    private HttpClientWrapper httpClientWrapper;
 
     public BooksCollectionServiceImpl() throws IOException {
-        URL resource = this.getClass().getClassLoader().getResource("/book-management-service.properties");
         properties = new Properties();
-        properties.load(resource.openStream());
+        properties.load(resourceStream());
+        httpClientWrapper = new HttpClientWrapper(properties.getProperty("hostname"), Integer.parseInt(properties.getProperty("port")));
+    }
+
+    private InputStream resourceStream() throws IOException {
+        return this.getClass().getClassLoader().getResource("book-management-service.properties").openStream();
     }
 
     public List<Book> allBooks() {
-        String hostname = properties.getProperty("hostname");
-        int port = Integer.parseInt(properties.getProperty("port"));
         String path = properties.getProperty("path");
-        String response = new HttpClientWrapper(hostname, port).get(path);
+        String response = httpClientWrapper.get(path);
         XStream xStream = new XStream();
         xStream.alias("book", Book.class);
         return (List) xStream.fromXML(response);
+    }
+
+    HttpClientWrapper getHttpClientWrapper() {
+        return httpClientWrapper;
+    }
+
+    public void setHttpWrapper(HttpClientWrapper wrapper) {
+        this.httpClientWrapper = wrapper;
     }
 }
