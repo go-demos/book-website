@@ -17,7 +17,6 @@ public class BooksCollectionServiceImpl implements BooksCollectionService {
 
     private Properties properties;
 
-    @Autowired
     public BooksCollectionServiceImpl() throws IOException {
         URL resource = this.getClass().getClassLoader().getResource("/book-management-service.properties");
         properties = new Properties();

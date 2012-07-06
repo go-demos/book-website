@@ -63,7 +63,7 @@ public class HttpClientWrapper {
     }
 
     private String baseUrl() {
-        return String.format("http://%s:%d/go", hostname, port);
+        return String.format("http://%s:%d", hostname, port);
     }
 
 }

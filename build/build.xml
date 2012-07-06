@@ -75,8 +75,11 @@
             <lib dir="${lib.dir}/logging" includes="*.jar" />
             <lib dir="${lib.dir}/spring" includes="*.jar" />
             <lib dir="${lib.dir}/velocity" includes="*.jar" />
+            <lib dir="${lib.dir}/http-client" includes="*.jar" />
+            <lib dir="${lib.dir}/xstream" includes="*.jar" />
             <classes dir="${classes.dir}" includes="**" />
             <classes dir="${src.dir}" includes="db/hibernate-mappings/**" />
+            <classes dir="${src.dir}" includes="*.properties" />
             <webinf dir="${web.inf.path}" includes="**" />
             <metainf dir="${meta.inf.path}" includes="**" />
             <fileset dir="${web.path}" includes="javascripts/**"/>
