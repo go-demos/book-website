@@ -196,6 +196,22 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
+    <library name="commons">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/lib/commons" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/lib/commons" recursive="false" />
+    </library>
+    <library name="http-client">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/lib/http-client" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/lib/http-client" recursive="false" />
+    </library>
     <library name="j2ee">
       <CLASSES>
         <root url="file://$PROJECT_DIR$/lib/servlets" />
@@ -211,6 +227,14 @@
       <JAVADOC />
       <SOURCES />
       <jarDirectory url="file://$PROJECT_DIR$/lib/spring" recursive="false" />
+    </library>
+    <library name="xstream">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/lib/xstream" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/lib/xstream" recursive="false" />
     </library>
   </component>
 </project>
