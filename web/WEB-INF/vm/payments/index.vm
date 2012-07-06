@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>Make Payment</title>
+</head>
+<body>
+<h1>You are about to buy $name</h1>
+<form action="$req.getContextPath()/payments/perform" method="post">
+    <input id="selected_isbn" type="hidden" value=""/>
+
+    <div>
+        <label for="card_number">Card Number</label>
+        <input id="card_number" type="text" value="" size="16"/>
+    </div>
+    <div>
+        <label for="card_expiry">Card Expiry</label>
+        <input id="card_expiry" type="text" value="" size="8"/>
+    </div>
+    <div>
+        <label for="card_cvv">CVV</label>
+        <input id="card_cvv" type="text" value="" size="3"/>
+    </div>
+    <div>
+        <input type="submit" name="Submit">
+        <input type="reset" name="Reset">
+    </div>
+</form>
+</body>
+</html>

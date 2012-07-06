@@ -30,4 +30,12 @@ public class BooksController {
         model.put("books", booksCollectionService.allBooks());
         return new ModelAndView("books/index", model);
     }
+
+    @RequestMapping(value = "/books/buy", method = RequestMethod.POST)
+    public ModelAndView buyBook(@RequestParam("isbn") String isbn,
+                                @RequestParam("name") String name) {
+        Map model = new HashMap();
+        model.put("name", name);
+        return new ModelAndView(new RedirectView("/payments/index", true), model);
+    }
 }

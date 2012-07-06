@@ -1,18 +1,26 @@
-OrderBooks = function(hidden) {
-    function selectISBN(element, hidden) {
-        var radio = $(element);
-        if (radio.attr("checked") && radio.attr("checked") === 'checked') {
-            $(hidden).val(checkBox.val());
-        }
-    }
+OrderBooks = function() {
 
-    function registerHandler(elements) {
-        $(elements).change(function() {
-            selectISBN($(this), hidden);
+    var form;
+
+    function registerChangeEvent(checkboxes) {
+        var self = this;
+        $(checkboxes).change(function() {
+            var radio = $(this);
+            if (radio.attr("checked") && radio.attr("checked") === 'checked') {
+                self.form = radio.parent();
+            }
         });
     }
 
+    function clickHandler(submitButton) {
+        var self = this;
+        $(submitButton).click(function() {
+            self.form.submit();
+        })
+    }
+
     return {
-        registerHandler : registerHandler
+        clickHandler : clickHandler,
+        registerChangeEvent : registerChangeEvent
     }
 };

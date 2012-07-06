@@ -7,32 +7,40 @@
 <body>
 <h1>Select a book you like</h1>
 
-<form action="$req.getContextPath()/books/create" method="post">
-    <input id="selected_isbn" type="hidden" value=""/>
-    <div>
-        <table>
-            <thead>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th>Book</th>
+            <th>Author</th>
+        </tr>
+        </thead>
+        <tbody>
+            #foreach ( $book in $books )
             <tr>
-                <th></th>
-                <th>Book</th>
-                <th>Author</th>
+                <td>
+                    <form action="$req.getContextPath()/books/buy" method="post">
+                        <input type="hidden" name="isbn" value="$book.isbn"/>
+                        <input type="hidden" name="name" value="$book.name"/>
+                        <input type="radio" name="isbn" class="book_isbn" />
+                    </form>
+                </td>
+                <td>$book.name</td>
+                <td>$book.author</td>
             </tr>
-            </thead>
-            <tbody>
-                #foreach ( $book in $books )
-                <tr>
-                    <input type="radio" name="isbn" value="$book.isbn" class="book_isbn"/>
-                    <td>$book.name</td>
-                    <td>$book.author</td>
-                </tr>
-                #end
-            </tbody>
-        </table>
-        <div>
-        </div>
-</form>
+            #end
+        </tbody>
+    </table>
+</div>
+<div>
+    <input type="submit" name="Buy" class="submit">
+    <input type="reset" name="Reset">
+</div>
 </body>
 <script type="text/javascript">
-    new OrderBooks("#selected_isbn").registerHandler($(".book_isbn"));
+    var orderBooks = new OrderBooks();
+    orderBooks.registerChangeEvent(".book_isbn");
+    orderBooks.clickHandler(".submit");
 </script>
 </html>
