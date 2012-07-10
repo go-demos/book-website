@@ -64,7 +64,7 @@
 
     <target name="test" depends="compile, test-for-ci" />
 
-    <target name="test-for-ci" depends="compile.tests-for-ci">
+    <target name="test-for-ci" depends="init, compile.tests-for-ci">
         <junit failureproperty="test.failure" printsummary="yes" haltonfailure="true" fork="true">
             <classpath refid="test.classpath"/>
             <batchtest todir="${test.reports.dir}">
@@ -74,7 +74,7 @@
         </junit>
     </target>
 
-    <target name="pkg-for-ci">
+    <target name="pkg-for-ci" depends="init">
         <property name="basename" value="book_website"/>
         <property name="war.path" value="${pkg.dir}/${basename}.war"/>
         <war destfile="${war.path}" webxml="${web.inf.path}/web.xml">
