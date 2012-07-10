@@ -20,8 +20,8 @@
         <input id="card_cvv" name="cvv" type="text" value="" size="3"/>
     </div>
     <div>
-        <input type="submit" name="Submit">
-        <input type="reset" name="Reset">
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
     </div>
 </form>
 </body>

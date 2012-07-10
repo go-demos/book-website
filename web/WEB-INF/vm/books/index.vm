@@ -5,6 +5,9 @@
     <script type="text/javascript" src="javascripts/order_books.js"></script>
 </head>
 <body>
+#if($books.isEmpty())
+<h1>No books available right now.</h1>
+#else
 <h1>Select a book you like</h1>
 
 <div>
@@ -23,7 +26,7 @@
                     <form action="$req.getContextPath()/books/buy" method="post">
                         <input type="hidden" name="isbn" value="$book.isbn"/>
                         <input type="hidden" name="name" value="$book.name"/>
-                        <input type="radio" name="isbn" class="book_isbn" />
+                        <input type="radio" name="isbn" class="book_isbn"/>
                     </form>
                 </td>
                 <td>$book.name</td>
@@ -34,8 +37,8 @@
     </table>
 </div>
 <div>
-    <input type="submit" name="Buy" class="submit">
-    <input type="reset" name="Reset">
+    <input type="submit" value="Buy" class="submit">
+    <input type="reset" value="Reset">
 </div>
 </body>
 <script type="text/javascript">
@@ -44,3 +47,4 @@
     orderBooks.clickHandler(".submit");
 </script>
 </html>
+#end

@@ -31,6 +31,12 @@ public class BooksCollectionServiceImplTest {
         assertThat(service.allBooks(), is(Arrays.asList(new Book("isbn1", "first", "person1", "pub1"), new Book("isbn2", "second", "person2", "pub2"))));
     }
 
+    @Test
+    public void shouldReturnAnEmptyBooksListIfTheRemoteThrowsUp() throws Exception {
+        BooksCollectionServiceImpl service = new BooksCollectionServiceImpl();
+        assertThat(service.allBooks().isEmpty(), is(true));
+    }
+
     private String file(String name) throws IOException {
         return IOUtils.toString(this.getClass().getClassLoader().getResource(name).openStream());
     }

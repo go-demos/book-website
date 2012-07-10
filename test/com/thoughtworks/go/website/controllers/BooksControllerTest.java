@@ -1,6 +1,7 @@
 package com.thoughtworks.go.website.controllers;
 
 import com.thoughtworks.go.website.models.Book;
+import com.thoughtworks.go.website.models.BookCookie;
 import com.thoughtworks.go.website.remote.service.BooksCollectionService;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,7 +27,7 @@ public class BooksControllerTest {
         when(service.allBooks()).thenReturn(expected);
 
         BooksController controller = new BooksController(service);
-        ModelAndView modelAndView = controller.allBooks(mock(HttpServletRequest.class));
+        ModelAndView modelAndView = controller.allBooks();
 
         assertThat((List<Book>) modelAndView.getModel().get("books"), is(expected));
     }
@@ -46,7 +47,7 @@ public class BooksControllerTest {
 
         assertThat(actual.getUrl(), is("/payments/index"));
         assertThat(actual, instanceOf(expected.getClass()));
-        verify(session).setAttribute("current_book", new BooksController.BookCookie("name", "isbn"));
+        verify(session).setAttribute("current_book", new BookCookie("name", "isbn"));
         verifyNoMoreInteractions(session);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -30,11 +31,15 @@ public class BooksCollectionServiceImpl implements BooksCollectionService {
     }
 
     public List<Book> allBooks() {
-        String path = properties.getProperty("path");
-        String response = httpClientWrapper.get(path);
-        XStream xStream = new XStream();
-        xStream.alias("book", Book.class);
-        return (List) xStream.fromXML(response);
+        try {
+            String path = properties.getProperty("path");
+            String response = httpClientWrapper.get(path);
+            XStream xStream = new XStream();
+            xStream.alias("book", Book.class);
+            return (List) xStream.fromXML(response);
+        } catch (Exception e) {
+            return new ArrayList<Book>();
+        }
     }
 
     HttpClientWrapper getHttpClientWrapper() {
