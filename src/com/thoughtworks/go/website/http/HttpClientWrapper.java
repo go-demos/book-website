@@ -4,7 +4,9 @@ import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HttpClientWrapper {
@@ -45,7 +47,7 @@ public class HttpClientWrapper {
         HttpMethod getMethod = factory.create(HttpMethodFactory.GET);
         getMethod.setURI(httpURL);
         if (params != null) {
-            getMethod.setParams(httpParams(params));
+            getMethod.setQueryString(httpParams(params).toArray(new NameValuePair[0]));
         }
         return getMethod;
     }
@@ -54,12 +56,12 @@ public class HttpClientWrapper {
         return returnCode >= 200 && returnCode < 300;
     }
 
-    private HttpMethodParams httpParams(Map<String, String> params) {
-        HttpMethodParams methodParams = new HttpMethodParams();
+    private List<NameValuePair> httpParams(Map<String, String> params) {
+        List<NameValuePair> pairs = new ArrayList<NameValuePair>();
         for (String param : params.keySet()) {
-            methodParams.setParameter(param,  params.get(param));
+            pairs.add(new NameValuePair(param, params.get(param)));
         }
-        return methodParams;
+        return pairs;
     }
 
     public String baseUrl() {

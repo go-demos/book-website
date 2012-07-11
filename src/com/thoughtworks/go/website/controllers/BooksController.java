@@ -1,6 +1,7 @@
 package com.thoughtworks.go.website.controllers;
 
 import com.thoughtworks.go.website.models.BookCookie;
+import com.thoughtworks.go.website.remote.exceptions.BookNotFoundException;
 import com.thoughtworks.go.website.remote.service.BooksCollectionService;
 import com.thoughtworks.go.website.remote.service.BooksInventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,14 @@ public class BooksController {
                                 @RequestParam("name") String name,
                                 HttpServletRequest request) {
         HttpSession session = request.getSession(true);
-        if (!booksInventoryService.checkInventory(isbn)) {
+        boolean exists = false;
+        try {
+            exists = booksInventoryService.checkInventory(isbn);
+        } catch (BookNotFoundException e) {
+            session.setAttribute("flash", e.getMessage());
+            return new ModelAndView(new RedirectView("/books", true), new HashMap());
+        }
+        if (!exists) {
             session.setAttribute("flash", "Book sold out. Please try again in a couple of days.");
             return new ModelAndView(new RedirectView("/books", true), new HashMap());
         }
