@@ -5,6 +5,9 @@
     <script type="text/javascript" src="javascripts/order_books.js"></script>
 </head>
 <body>
+#if ($flash_message)
+    <div class="flash">$flash_message</div>
+#end
 #if($books.isEmpty())
 <h1>No books available right now.</h1>
 #else

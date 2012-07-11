@@ -2,6 +2,7 @@ package com.thoughtworks.go.website.controllers;
 
 import com.thoughtworks.go.website.models.BookCookie;
 import com.thoughtworks.go.website.remote.service.BooksCollectionService;
+import com.thoughtworks.go.website.remote.service.BooksInventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,15 +20,21 @@ import java.util.Map;
 public class BooksController {
 
     private BooksCollectionService booksCollectionService;
+    private BooksInventoryService booksInventoryService;
 
     @Autowired
-    public BooksController(BooksCollectionService booksCollectionService) {
+    public BooksController(BooksCollectionService booksCollectionService, BooksInventoryService booksInventoryService) {
         this.booksCollectionService = booksCollectionService;
+        this.booksInventoryService = booksInventoryService;
     }
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
-    public ModelAndView allBooks() {
+    public ModelAndView allBooks(HttpServletRequest request) {
         Map model = new HashMap();
+        String flash = (String) request.getSession().getAttribute("flash");
+        if (flash != null) {
+            model.put("flash_message", flash);
+        }
         model.put("books", booksCollectionService.allBooks());
         return new ModelAndView("books/index", model);
     }
@@ -37,6 +44,10 @@ public class BooksController {
                                 @RequestParam("name") String name,
                                 HttpServletRequest request) {
         HttpSession session = request.getSession(true);
+        if (!booksInventoryService.checkInventory(isbn)) {
+            session.setAttribute("flash", "Book sold out. Please try again in a couple of days.");
+            return new ModelAndView(new RedirectView("/books", true), new HashMap());
+        }
         session.setAttribute("current_book", new BookCookie(name, isbn));
         return new ModelAndView(new RedirectView("/payments/index", true), new HashMap());
     }
