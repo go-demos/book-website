@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0"?>
 <project name="BookWebsite-Build" basedir="../" default="pkg">
     <property name="src.dir" location="${basedir}/src"/>
     <property name="test.dir" location="${basedir}/test"/>
