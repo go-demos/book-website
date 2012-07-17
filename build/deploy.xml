@@ -41,16 +41,26 @@
     <property name="war.path" location="${pkg.dir}/${basename}.war"/>
 
     <target name="-ensure-tomcat-server">
-        <waitfor maxwait="10" maxwaitunit="second" checkevery="5000">
+        <waitfor maxwait="10" maxwaitunit="second" checkevery="5000" timeoutproperty="tomcat.not.started">
             <http url="http://localhost"/>
         </waitfor>
     </target>
 
-    <target name="deploy" description="Install web application" depends="-ensure-tomcat-server">
+    <target name="start-tomcat" depends="-ensure-tomcat-server" if="tomcat.not.started">
+        <exec command="/bin/bash">
+            <arg>/usr/local/apache-tomcat-7.0.29/bin/shutdown.sh</arg>
+        </exec>
+        <exec command="/bin/bash">
+            <arg>/usr/local/apache-tomcat-7.0.29/bin/startup.sh</arg>
+        </exec>
+    </target>
+
+    <target name="deploy" description="Install web application">
         <deploy url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}" path="${tomcat.context.path}" war="file://${war.path}"/>
     </target>
 
-    <target name="undeploy" description="Remove web application" depends="-ensure-tomcat-server">
+    <target name="undeploy" description="Remove web application">
         <undeploy url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}" path="${tomcat.context.path}" failonerror="false" />
     </target>
+
 </project>
