@@ -40,11 +40,17 @@
     <property name="basename" value="book_website"/>
     <property name="war.path" location="${pkg.dir}/${basename}.war"/>
 
-    <target name="deploy" description="Install web application">
+    <target name="-ensure-tomcat-server">
+        <waitfor maxwait="10" maxwaitunit="second" checkevery="5000">
+            <http url="http://localhost"/>
+        </waitfor>
+    </target>
+
+    <target name="deploy" description="Install web application" depends="-ensure-tomcat-server">
         <deploy url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}" path="${tomcat.context.path}" war="file://${war.path}"/>
     </target>
 
-    <target name="undeploy" description="Remove web application">
+    <target name="undeploy" description="Remove web application" depends="-ensure-tomcat-server">
         <undeploy url="${tomcat.manager.url}" username="${tomcat.manager.username}" password="${tomcat.manager.password}" path="${tomcat.context.path}" failonerror="false" />
     </target>
 </project>
