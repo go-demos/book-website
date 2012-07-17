@@ -47,10 +47,10 @@
     </target>
 
     <target name="start-tomcat" depends="-ensure-tomcat-server" if="tomcat.not.started">
-        <exec command="/bin/bash">
+        <exec executable="/bin/bash" failonerror="false" failifexecutionfails="false">
             <arg>/usr/local/apache-tomcat-7.0.29/bin/shutdown.sh</arg>
         </exec>
-        <exec command="/bin/bash">
+        <exec executable="/bin/bash" failonerror="false" failifexecutionfails="false">
             <arg>/usr/local/apache-tomcat-7.0.29/bin/startup.sh</arg>
         </exec>
     </target>
