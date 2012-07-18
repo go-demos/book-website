@@ -40,18 +40,21 @@
     <property name="basename" value="book_website"/>
     <property name="war.path" location="${pkg.dir}/${basename}.war"/>
 
-    <target name="-ensure-tomcat-server">
-        <waitfor maxwait="10" maxwaitunit="second" checkevery="5000" timeoutproperty="tomcat.not.started">
+    <target name="ensure-tomcat-stopped">
+        <waitfor maxwait="10" maxwaitunit="second" checkevery="5000">
             <http url="http://localhost"/>
         </waitfor>
     </target>
 
-    <target name="start-tomcat" depends="-ensure-tomcat-server" if="tomcat.not.started">
-        <exec executable="/bin/bash" failonerror="false" failifexecutionfails="false">
-            <arg value="/usr/local/apache-tomcat-7.0.29/bin/shutdown.sh"/>
-        </exec>
+    <target name="start-tomcat">
         <exec executable="/bin/bash" failonerror="false" failifexecutionfails="false">
             <arg value="/usr/local/apache-tomcat-7.0.29/bin/startup.sh"/>
+        </exec>
+     </target>
+
+    <target name="stop-tomcat">
+        <exec executable="/bin/bash" failonerror="false" failifexecutionfails="false">
+            <arg value="/usr/local/apache-tomcat-7.0.29/bin/shutdown.sh"/>
         </exec>
     </target>
 
