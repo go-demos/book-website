@@ -233,7 +233,9 @@
         <root url="file://$PROJECT_DIR$/lib/spring" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/lib_sources/spring-webmvc-sources.jar!/" />
+      </SOURCES>
       <jarDirectory url="file://$PROJECT_DIR$/lib/spring" recursive="false" />
     </library>
     <library name="test-libs">
