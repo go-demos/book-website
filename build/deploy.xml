@@ -41,12 +41,6 @@
     <property name="war.path" location="${pkg.dir}/${basename}.war"/>
 
     <target name="ensure-tomcat-stopped">
-        <waitfor maxwait="10" maxwaitunit="second" checkevery="5000">
-            <http url="http://localhost"/>
-        </waitfor>
-    </target>
-
-    <target name="ensure-tomcat-stopped">
         <waitfor maxwait="20" maxwaitunit="second" checkevery="2" checkeveryunit="second" timeoutproperty="tomcat.started">
             <not>
                 <http url="http://localhost:8080"/>
