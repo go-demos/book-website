@@ -74,7 +74,7 @@
         </junit>
     </target>
 
-    <target name="pkg-for-ci" depends="clean, init">
+    <target name="pkg-for-ci">
         <property name="basename" value="book_website"/>
         <property name="war.path" value="${pkg.dir}/${basename}.war"/>
         <war destfile="${war.path}" webxml="${web.inf.path}/web.xml">
