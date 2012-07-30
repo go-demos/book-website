@@ -1,0 +1,12 @@
+# Have a book detail page
+
+## Show the image in the page
+## Show the inventory details in the page
+## Show related books section in the bottom (Nice to have)
+
+# Fix CSS on all the website pages
+# Add HTML title to all the pages
+
+# Labels
+# Smoke Tests
+# Create a deployment issue in Staging

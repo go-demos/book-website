@@ -1,0 +1,33 @@
+* {
+    font-family: Helvetica,monospace;
+}
+
+.content {
+    padding-left: 40px;
+    vertical-align: top;
+}
+
+.add_to_cart {
+    padding-top: 15px;
+}
+
+.mail_me {
+    padding-top: 15px;
+}
+
+.not_available {
+    padding-top: 40px;
+    font-weight: bold;
+    color: red;
+}
+
+.available {
+    padding-top: 40px;
+    font-weight: bold;
+    color: green;
+}
+
+.author {
+    margin-top: -10px;
+}
+

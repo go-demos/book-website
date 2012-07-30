@@ -4,7 +4,6 @@
     <property name="test.dir" location="${basedir}/test"/>
     <property name="lib.dir" location="${basedir}/lib"/>
     <property name="web.path" value="${basedir}/web"/>
-    <property name="js.path" value="${web.path}/javascripts"/>
     <property name="web.inf.path" value="${web.path}/WEB-INF"/>
     <property name="meta.inf.path" value="${basedir}/META-INF"/>
     <property name="test.lib.dir" location="${basedir}/test-lib"/>
@@ -90,6 +89,8 @@
             <webinf dir="${web.inf.path}" includes="**" />
             <metainf dir="${meta.inf.path}" includes="**" />
             <fileset dir="${web.path}" includes="javascripts/**"/>
+            <fileset dir="${web.path}" includes="images/**"/>
+            <fileset dir="${web.path}" includes="stylesheets/**"/>
         </war>
     </target>
 

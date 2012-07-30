@@ -31,13 +31,30 @@ public class BooksController {
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public ModelAndView allBooks(HttpServletRequest request) {
-        Map model = new HashMap();
-        String flash = (String) request.getSession().getAttribute("flash");
+        Map<String, Object> model = new HashMap<String, Object>();
+        HttpSession session = request.getSession();
+        String flash = (String) session.getAttribute("flash");
+        session.removeAttribute("flash");
         if (flash != null) {
             model.put("flash_message", flash);
         }
         model.put("books", booksCollectionService.allBooks());
         return new ModelAndView("books/index", model);
+    }
+
+    @RequestMapping(value = "/books/book", method = RequestMethod.GET)
+    public ModelAndView getBook(@RequestParam("isbn") String isbn,
+                                HttpServletRequest request) {
+        Map<String, Object> model = new HashMap<String, Object>();
+        model.put("book", booksCollectionService.getBook(isbn));
+        boolean exists;
+        try {
+            exists = booksInventoryService.checkInventory(isbn);
+        } catch (BookNotFoundException e) {
+            exists = false;
+        }
+        model.put("available", exists);
+        return new ModelAndView("books/book", model);
     }
 
     @RequestMapping(value = "/books/buy", method = RequestMethod.POST)
@@ -59,5 +76,4 @@ public class BooksController {
         session.setAttribute("current_book", new BookCookie(name, isbn));
         return new ModelAndView(new RedirectView("/payments/index", true), new HashMap());
     }
-
 }

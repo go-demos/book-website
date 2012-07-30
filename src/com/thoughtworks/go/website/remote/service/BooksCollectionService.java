@@ -8,4 +8,6 @@ import java.util.List;
 public interface BooksCollectionService {
 
     List<Book> allBooks();
+
+    Book getBook(String isbn);
 }

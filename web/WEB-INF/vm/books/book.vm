@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Buy $book.name</title>
+    <link type="text/css" rel="stylesheet" media="screen" href="$req.getContextPath()/stylesheets/main.css">
+</head>
+<body>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <img src="$req.getContextPath()/images/$book.isbn"/>
+        </td>
+        <td class="content">
+            <h2>$book.name</h2>
+            <div class="author">$book.author (Author)</div>
+            <div class="price">$17.00</div>
+            #if ($available)
+                <div class="available">In Stock.</div>
+                <div class="add_to_cart">
+                    <button>Add to cart</button>
+                </div>
+            #else
+                <div class="not_available">Sorry! This book is temporarily out of stock.</div>
+                <div class="mail_me">
+                    <button>Email me when it becomes available</button>
+                </div>
+            #end
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

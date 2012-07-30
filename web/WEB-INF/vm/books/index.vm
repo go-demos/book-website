@@ -29,10 +29,10 @@
                     <form action="$req.getContextPath()/books/buy" method="post">
                         <input type="hidden" name="isbn" value="$book.isbn"/>
                         <input type="hidden" name="name" value="$book.name"/>
-                        <input type="radio" name="isbn_check" class="book_isbn"/>
+                        <input  type="radio" name="isbn_check" class="book_isbn" />
                     </form>
                 </td>
-                <td>$book.name</td>
+                <td><a href="$req.getContextPath()/books/book?isbn=$book.isbn">$book.name</a></td>
                 <td>$book.author</td>
             </tr>
             #end

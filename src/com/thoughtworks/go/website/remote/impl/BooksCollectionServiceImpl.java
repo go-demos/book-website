@@ -42,6 +42,14 @@ public class BooksCollectionServiceImpl implements BooksCollectionService {
         }
     }
 
+    public Book getBook(String isbn) {
+        List<Book> books = allBooks();
+        for (Book book : books) {
+            if (book.getIsbn().equals(isbn)) return book;
+        }
+        throw new RuntimeException(String.format("Book with isbn '%s' not found", isbn));
+    }
+
     HttpClientWrapper getHttpClientWrapper() {
         return httpClientWrapper;
     }
