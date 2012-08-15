@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sed -i 's/padding-top: 5px;/padding-top: 40px;/g' web/stylesheets/main.css
+sed -i 's/<div class="available">In Stocl./<div class="available">In Stock./g' web/WEB-INF/vm/books/book.vm
