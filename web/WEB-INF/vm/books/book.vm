@@ -15,7 +15,7 @@
             <div class="author">$book.author (Author)</div>
             <div class="price">$17.00</div>
             #if ($available)
-                <div class="available">In Stocl.</div>
+                <div class="available">In Stock.</div>
                 <div class="add_to_cart">
                     <button>Add to cart</button>
                 </div>
