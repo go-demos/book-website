@@ -2,32 +2,45 @@
     font-family: Helvetica,monospace;
 }
 
-.content {
-    padding-left: 40px;
-    vertical-align: top;
+body {
+    padding-top: 50px;
 }
 
-.add_to_cart {
-    padding-top: 15px;
-}
-
-.mail_me {
-    padding-top: 15px;
-}
-
-.not_available {
-    padding-top: 5px;
-    font-weight: bold;
-    color: red;
+.navbar-search .search-query {
+    height: 28px;
 }
 
 .available {
-    padding-top: 5px;
-    font-weight: bold;
-    color: green;
+    color: #009933;
 }
 
-.author {
-    margin-top: -10px;
+.not_available {
+    color: 800000;
 }
 
+.book_thumb {
+    width: 200px;
+    float: left;
+    padding: 20px;
+}
+
+.book_detail {
+    margin-left: 250px;
+    position: relative;
+    height: 225px;
+    padding-top: 20px;
+}
+
+.book_detail .author {
+    font-style: italic;
+}
+
+.book_detail .action {
+    position: absolute;
+    bottom: 0px;
+}
+
+.recommended .thumbnails li {
+    clear: both;
+    margin-left: 0px;
+}
