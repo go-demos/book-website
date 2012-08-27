@@ -2,32 +2,81 @@
 <head>
     <title>Buy $book.name</title>
     <link type="text/css" rel="stylesheet" media="screen" href="$req.getContextPath()/stylesheets/main.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="$req.getContextPath()/stylesheets/bootstrap.min.css">
 </head>
 <body>
-<table>
-    <tbody>
-    <tr>
-        <td>
-            <img src="$req.getContextPath()/images/$book.isbn"/>
-        </td>
-        <td class="content">
-            <h2>$book.name</h2>
-            <div class="author">$book.author (Author)</div>
-            <div class="price">$17.00</div>
-            #if ($available)
-                <div class="available">In Stock.</div>
-                <div class="add_to_cart">
-                    <button>Add to cart</button>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="brand" href="$req.getContextPath()/books">Book Website</a>
+                <div class="nav-collapse collapse">
+                    <!-- <ul class="nav">
+                        <li class="">
+                            <a href="$req.getContextPath()/books">All Books</a>
+                        </li>
+                    </ul> -->
                 </div>
-            #else
-                <div class="not_available">Sorry! This book is temporarily out of stock.</div>
-                <div class="mail_me">
-                    <button>Email me when it becomes available</button>
+                <form class="navbar-search pull-left">
+                    <input type="text" class="search-query" placeholder="Search">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span8">
+                <div class="book_thumb">
+                    #set( $image = $book.isbn )
+                    #set( $image_ext = ".jpg" )
+                    #set( $image_path = "$req.getContextPath()/images/full-size/$image$image_ext" )
+                    <img src="$image_path" class="img-polaroid"/>
                 </div>
-            #end
-        </td>
-    </tr>
-    </tbody>
-</table>
+                <div class="book_detail">
+                    <h2>$book.name</h2>
+                    <h4 class="author">$book.author (Author)</h4>
+                    <div class="price">$17.00</div>
+                    <div class="action">
+                        #if ($available)
+                            <div class="available">In Stock.</div>
+                            <div class="add_to_cart">
+                                <button class="btn btn-primary">Add to cart</button>
+                                <a href="$req.getContextPath()/books" class="btn">Back</a>
+                            </div>
+                        #else
+                            <div class="not_available">Sorry! This book is temporarily out of stock.</div>
+                            <div class="mail_me">
+                                <button class="btn btn-primary">Tell me when it is available</button>
+                                <a href="$req.getContextPath()/books" class="btn">Back</a>
+                            </div>
+                        #end
+                    </div>
+                </div>
+            </div>
+            <div class="span4 pull-right recommended">
+                #if($books.isEmpty())
+                #else
+                    <h4>You may also like</h4>
+                    <ul class="thumbnails">
+                        #foreach ( $book in $books )
+                            <li class="span4">
+                                <div class="thumbnail">
+                                    #set( $image = $book.isbn )
+                                    #set( $image_ext = ".jpg" )
+                                    #set( $image_path = "$req.getContextPath()/images/thumbs/$image$image_ext" )
+                                    <a href="$req.getContextPath()/books/book?isbn=$book.isbn">
+                                        <img src="$image_path" class="img-polaroid"/>
+                                    </a>
+                                    <div class="caption">
+                                        <h4><a href="$req.getContextPath()/books/book?isbn=$book.isbn">$book.name</a></h4>
+                                        <p>$book.author</p>
+                                    <div>
+                                </div>
+                            </li>
+                        #end
+                    </ul>
+                #end
+            </div>
+        </div>
+    </div>
 </body>
 </html>

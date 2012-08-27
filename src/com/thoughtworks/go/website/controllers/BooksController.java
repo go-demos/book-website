@@ -46,6 +46,7 @@ public class BooksController {
     public ModelAndView getBook(@RequestParam("isbn") String isbn,
                                 HttpServletRequest request) {
         Map<String, Object> model = new HashMap<String, Object>();
+        model.put("books", booksCollectionService.allBooks());
         model.put("book", booksCollectionService.getBook(isbn));
         boolean exists;
         try {
