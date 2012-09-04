@@ -1,3 +1,4 @@
 target
 out
 *.iws
+demo-utils/deploy_status.txt
