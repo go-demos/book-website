@@ -37,7 +37,7 @@
                     <div class="price">$17.00</div>
                     <div class="action">
                         #if ($available)
-                            <div class="available">In Stocl.</div>
+                            <div class="available">In Stock.</div>
                             <div class="add_to_cart">
                                 <button class="btn btn-primary">Add to cart</button>
                                 <a href="$req.getContextPath()/books" class="btn">Back</a>
